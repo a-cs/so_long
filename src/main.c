@@ -6,40 +6,34 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 22:33:55 by acarneir          #+#    #+#             */
-/*   Updated: 2022/01/27 22:50:41 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/02/07 22:13:58 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-typedef struct s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data;
-
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	print_error(char *msg)
 {
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
+	printf("Error\n%s\n", msg);
+	exit(0);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	void	*mlx;
-	void	*mlx_win;
-	t_data	img;
+	int	fd;
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 800, 600, "Hello world!");
-	img.img = mlx_new_image(mlx, 800, 600);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-			&img.endian);
-	my_mlx_pixel_put(&img, 300, 300, 0x00FF0000);
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
+	if (argc == 2)
+	{
+		printf("argv = %s\n", argv[1]);
+		if (ft_strncmp(argv[1] + (ft_strlen(argv[1]) - 4), ".ber", 4) != 0)
+			print_error("The argument must be a .ber file.");
+	}
+	else
+		print_error("Invalid number of arguments! Try again.");
+	fd = open(ft_strjoin("./maps/", argv[1]), O_RDWR);
+	if (fd < 0)
+		print_error("File not found.");
+	printf("fd = %d\n", fd);
+	close(fd);
+	return (0);
 }
