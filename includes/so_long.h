@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 22:34:21 by acarneir          #+#    #+#             */
-/*   Updated: 2022/02/07 21:45:58 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/02/10 22:24:45 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,26 @@
 # define RIGHT	0x64
 # define UP		0x77
 # define DOWN	0x73
+
+typedef struct s_map
+{
+	char	**matrix;
+}	t_map;
+
+typedef struct s_game
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	t_map	map;
+}	t_game;
+
+void	check_args(int argc, char **argv);
+int		open_fd(char **argv);
+void	print_error(char *msg);
+void	ft_free_ptr(void **ptr);
+void	load_map(char **argv, t_game *game);
+void	check_map(t_game *game);
+void	free_map(char **map);
+
 
 #endif

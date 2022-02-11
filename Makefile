@@ -6,7 +6,7 @@
 #    By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/27 22:10:42 by acarneir          #+#    #+#              #
-#    Updated: 2022/01/27 22:30:26 by acarneir         ###   ########.fr        #
+#    Updated: 2022/02/10 22:25:03 by acarneir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = so_long
 
 CC = clang
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 MLX_FLAGS = -lX11 -lXext -lmlx
 
 LIBFT_DIR = ./libft
@@ -28,6 +28,10 @@ INCLUDE = -I $(INCLUDE_DIR)
 
 SRC_DIR = ./src
 SRCS = main.c \
+	check_args.c \
+	print_error.c \
+	map.c \
+	check_map.c \
 
 OBJ_DIR = ./objs
 OBJS := $(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))

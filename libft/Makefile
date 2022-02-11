@@ -6,13 +6,13 @@
 #    By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/28 23:56:43 by acarneir          #+#    #+#              #
-#    Updated: 2021/07/28 23:56:43 by acarneir         ###   ########.fr        #
+#    Updated: 2022/02/10 21:46:28 by acarneir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 FT = ft_atoi.o \
 		ft_bzero.o \
@@ -47,7 +47,9 @@ FT = ft_atoi.o \
 		ft_strtrim.o \
 		ft_substr.o \
 		ft_tolower.o \
-		ft_toupper.o
+		ft_toupper.o \
+		get_next_line.o \
+		ft_free_ptr.o
 
 all: $(NAME)
 

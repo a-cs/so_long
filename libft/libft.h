@@ -6,21 +6,16 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 22:41:05 by acarneir          #+#    #+#             */
-/*   Updated: 2021/07/28 22:41:05 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/02/10 21:46:09 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+# define BUFFER_SIZE	80
 
 # include <stdlib.h>
 # include <unistd.h>
-
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}				t_list;
 
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
@@ -56,5 +51,7 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
+char	*get_next_line(int fd);
+void	ft_free_ptr(void **ptr);
 
 #endif
