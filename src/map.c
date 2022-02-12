@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 20:47:59 by acarneir          #+#    #+#             */
-/*   Updated: 2022/02/10 22:24:00 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/02/11 21:47:12 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	load_map(char **argv, t_game *game)
 	game->map.matrix = ft_split(map, '\n');
 	ft_free_ptr((void *)&map);
 	close(fd);
-	check_map(game);
+	check_map(&game->map);
 }
 
 

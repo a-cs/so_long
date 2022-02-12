@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 22:34:21 by acarneir          #+#    #+#             */
-/*   Updated: 2022/02/10 22:24:45 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/02/11 21:57:44 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,19 @@
 # define UP		0x77
 # define DOWN	0x73
 
+typedef struct s_counter
+{
+	int		exit;
+	int		collectible;
+	int		player;
+}	t_counter;
+
 typedef struct s_map
 {
-	char	**matrix;
+	int			max_x;
+	int			max_y;
+	char		**matrix;
+	t_counter	counter;
 }	t_map;
 
 typedef struct s_game
@@ -40,7 +50,7 @@ int		open_fd(char **argv);
 void	print_error(char *msg);
 void	ft_free_ptr(void **ptr);
 void	load_map(char **argv, t_game *game);
-void	check_map(t_game *game);
+void	check_map(t_map *map);
 void	free_map(char **map);
 
 
