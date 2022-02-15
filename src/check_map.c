@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 22:23:30 by acarneir          #+#    #+#             */
-/*   Updated: 2022/02/11 22:08:34 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/02/15 01:27:39 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	is_map_rectangular(t_map *map)
 	while (map->matrix[row])
 	{
 		// printf("row = %d len = %d->%s<-\n", row, (int)ft_strlen(map->matrix[row]),  map->matrix[row]);
-		if(len != (int)ft_strlen(map->matrix[row]))
+		if (len != (int)ft_strlen(map->matrix[row]))
 		{
 			len = -1;
 			break ;
@@ -124,5 +124,6 @@ void	check_map(t_map *map)
 	map->counter.exit = 0;
 	map->counter.collectible = 0;
 	map->counter.player = 0;
+	map->counter.steps = 0;
 	get_map_counters(map);
 }

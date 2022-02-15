@@ -6,7 +6,7 @@
 #    By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/27 22:10:42 by acarneir          #+#    #+#              #
-#    Updated: 2022/02/10 22:25:03 by acarneir         ###   ########.fr        #
+#    Updated: 2022/02/14 23:20:15 by acarneir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,8 @@ SRCS = main.c \
 	print_error.c \
 	map.c \
 	check_map.c \
+	key_hooks.c \
+	game.c
 
 OBJ_DIR = ./objs
 OBJS := $(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))

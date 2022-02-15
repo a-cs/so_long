@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 22:34:21 by acarneir          #+#    #+#             */
-/*   Updated: 2022/02/11 21:57:44 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/02/15 01:27:29 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,21 @@
 # define UP		0x77
 # define DOWN	0x73
 
+# define SPRITE_DIM	50
+
+typedef struct s_window
+{
+	void	*win;
+	int		width;
+	int		height;
+}				t_window;
+
 typedef struct s_counter
 {
 	int		exit;
 	int		collectible;
 	int		player;
+	int		steps;
 }	t_counter;
 
 typedef struct s_map
@@ -38,11 +48,49 @@ typedef struct s_map
 	t_counter	counter;
 }	t_map;
 
+typedef struct s_sprite
+{
+	void	*img;
+	char	*addr;
+	int		width;
+	int		height;
+	int		bpp;
+	int		line_length;
+	int		endian;
+}	t_sprite;
+
+typedef struct s_pos
+{
+	int		x;
+	int		y;
+}				t_pos;
+
+typedef struct s_player
+{
+	void	*img;
+	char	*addr;
+	int		width;
+	int		height;
+	int		bpp;
+	int		line_length;
+	int		endian;
+	t_pos	*pos;
+}	t_player;
+
+
+
+
+
 typedef struct s_game
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	t_map	map;
+	void		*mlx;
+	t_window	*window;
+	t_map		map;
+	t_sprite	collectible;
+	t_sprite	exit;
+	t_sprite	floor;
+	t_sprite	wall;
+	t_player	player;
 }	t_game;
 
 void	check_args(int argc, char **argv);
@@ -52,6 +100,9 @@ void	ft_free_ptr(void **ptr);
 void	load_map(char **argv, t_game *game);
 void	check_map(t_map *map);
 void	free_map(char **map);
+void	load_game(t_game *game);
+int		key_hooks(int key, t_game *game);
+int		end_game(t_game *game);
 
 
 #endif
