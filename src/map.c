@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 20:47:59 by acarneir          #+#    #+#             */
-/*   Updated: 2022/02/11 21:47:12 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/02/16 23:33:15 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	free_map(char **map)
 	}
 	ft_free_ptr((void *)&map);
 }
-
-
 
 void	load_map(char **argv, t_game *game)
 {
@@ -53,5 +51,3 @@ void	load_map(char **argv, t_game *game)
 	close(fd);
 	check_map(&game->map);
 }
-
-

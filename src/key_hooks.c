@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:17:40 by acarneir          #+#    #+#             */
-/*   Updated: 2022/02/15 01:41:59 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/02/16 23:49:25 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,25 @@ int	key_hooks(int key, t_game *game)
 {
 	if (key == ESC)
 		end_game(game);
-	if (key == UP)
+	if (key == UP || key == AROW_UP)
+	{
+		game->player.orientation = 0;
 		move(game, 0, -1);
-	if (key == DOWN)
+	}
+	if (key == DOWN || key == AROW_DOWN)
+	{
+		game->player.orientation = 2;
 		move(game, 0, +1);
-	if (key == LEFT)
+	}
+	if (key == LEFT || key == AROW_LEFT)
+	{
+		game->player.orientation = 1;
 		move(game, -1, 0);
-	if (key == RIGHT)
+	}
+	if (key == RIGHT || key == AROW_RIGHT)
+	{
+		game->player.orientation = 3;
 		move(game, +1, 0);
+	}
 	return (0);
 }

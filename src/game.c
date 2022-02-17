@@ -6,24 +6,16 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 23:24:39 by acarneir          #+#    #+#             */
-/*   Updated: 2022/02/15 01:08:42 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/02/16 23:32:27 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-// int	handle_no_event(void *data)
-// {
-// 	if(data)
-// 	{
-		
-// 	}
-// 	/* This function needs to exist, but it is useless for the moment */
-// 	return (0);
-// }
-
 int	end_game(t_game *game)
 {
+	int	i;
+
 	mlx_destroy_window(game->mlx, game->window->win);
 	game->window->win = NULL;
 	if (game->floor.img != NULL)
@@ -34,11 +26,16 @@ int	end_game(t_game *game)
 		mlx_destroy_image(game->mlx, game->exit.img);
 	if (game->collectible.img != NULL)
 		mlx_destroy_image(game->mlx, game->collectible.img);
-	if (game->player.img != NULL)
-		mlx_destroy_image(game->mlx, game->player.img);
+	i = -1;
+	while (++i < 4)
+	{
+		if (game->player.img[i] != NULL)
+			mlx_destroy_image(game->mlx, game->player.img[i]);
+	}
 	free_map(game->map.matrix);
 	ft_free_ptr((void *)&game->window);
 	ft_free_ptr((void *)&game->player.pos);
+	ft_free_ptr((void *)&game->player.img);
 	mlx_destroy_display(game->mlx);
 	ft_free_ptr(&game->mlx);
 	exit(0);
@@ -60,34 +57,30 @@ void	put_image(t_game *game, int x, int y)
 			game->collectible.img, x * game->collectible.width,
 			y * game->collectible.height);
 	if (game->map.matrix[y][x] == 'P')
-		mlx_put_image_to_window(game->mlx, game->window->win, game->player.img,
-			x * game->player.width, y * game->player.height);
+		mlx_put_image_to_window(game->mlx, game->window->win,
+			game->player.img[game->player.orientation], x * game->player.width,
+			y * game->player.height);
 }
 
 void	load_sprites(t_game *game)
 {
 	game->floor.img = mlx_xpm_file_to_image(game->mlx, "./assets/floor.xpm",
 			&game->floor.width, &game->floor.height);
-	game->floor.addr = mlx_get_data_addr(game->floor.img, &game->floor.bpp,
-			&game->floor.line_length, &game->floor.endian);
 	game->collectible.img = mlx_xpm_file_to_image(game->mlx,
 			"./assets/collectible.xpm", &game->collectible.width,
 			&game->collectible.height);
-	game->collectible.addr = mlx_get_data_addr(game->collectible.img,
-			&game->collectible.bpp,	&game->collectible.line_length,
-			&game->collectible.endian);
 	game->exit.img = mlx_xpm_file_to_image(game->mlx, "./assets/exit.xpm",
 			&game->exit.width, &game->exit.height);
-	game->exit.addr = mlx_get_data_addr(game->exit.img, &game->exit.bpp,
-			&game->exit.line_length, &game->exit.endian);
 	game->wall.img = mlx_xpm_file_to_image(game->mlx, "./assets/wall.xpm",
 			&game->wall.width, &game->wall.height);
-	game->wall.addr = mlx_get_data_addr(game->wall.img, &game->wall.bpp,
-			&game->wall.line_length, &game->wall.endian);
-	game->player.img = mlx_xpm_file_to_image(game->mlx, "./assets/w1.xpm",
+	game->player.img[0] = mlx_xpm_file_to_image(game->mlx, "./assets/w1.xpm",
 			&game->player.width, &game->player.height);
-	game->player.addr = mlx_get_data_addr(game->player.img, &game->player.bpp,
-			&game->player.line_length, &game->player.endian);
+	game->player.img[1] = mlx_xpm_file_to_image(game->mlx, "./assets/a1.xpm",
+			&game->player.width, &game->player.height);
+	game->player.img[2] = mlx_xpm_file_to_image(game->mlx, "./assets/s1.xpm",
+			&game->player.width, &game->player.height);
+	game->player.img[3] = mlx_xpm_file_to_image(game->mlx, "./assets/d1.xpm",
+			&game->player.width, &game->player.height);
 }
 
 int	render_game(t_game	*game)
@@ -104,7 +97,6 @@ int	render_game(t_game	*game)
 			while (x <= game->map.max_x)
 			{
 				put_image(game, x, y);
-				// printf("X= %d, Y= %d\n", x, y);
 				x++;
 			}
 			y++;
@@ -117,9 +109,9 @@ void	load_game(t_game *game)
 {
 	game->window = ft_calloc(1, sizeof(t_window));
 	game->player.pos = ft_calloc(1, sizeof(t_pos));
+	game->player.img = ft_calloc(4, sizeof(void *));
+	game->player.orientation = 0;
 	game->mlx = mlx_init();
-	// game->window = mlx_new_window(game->mlx, (game->map.max_x + 1) * SPRITE_DIM,
-	// 		(game->map.max_y + 1) * SPRITE_DIM, "so_long");
 	game->window->width = SPRITE_DIM * (game->map.max_x + 1);
 	game->window->height = SPRITE_DIM * (game->map.max_y + 1);
 	game->window->win = mlx_new_window(game->mlx,
@@ -131,7 +123,4 @@ void	load_game(t_game *game)
 	mlx_hook(game->window->win, 2, 1L << 0, key_hooks, game);
 	mlx_loop_hook(game->mlx, &render_game, game);
 	mlx_loop(game->mlx);
-	
-	// end_game(game);
-	// free(game->mlx);
 }

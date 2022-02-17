@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 22:34:21 by acarneir          #+#    #+#             */
-/*   Updated: 2022/02/15 01:27:29 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/02/16 23:52:03 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,15 @@
 # include <stdio.h>
 # include <fcntl.h>
 
-# define ESC	0xff1b
-# define LEFT	0x61
-# define RIGHT	0x64
-# define UP		0x77
-# define DOWN	0x73
+# define ESC		0xff1b
+# define LEFT		0x61
+# define RIGHT		0x64
+# define UP			0x77
+# define DOWN		0x73
+# define AROW_LEFT	0xff51
+# define AROW_RIGHT	0xff53
+# define AROW_UP		0xff52
+# define AROW_DOWN	0xff54
 
 # define SPRITE_DIM	50
 
@@ -30,7 +34,7 @@ typedef struct s_window
 	void	*win;
 	int		width;
 	int		height;
-}				t_window;
+}	t_window;
 
 typedef struct s_counter
 {
@@ -51,35 +55,24 @@ typedef struct s_map
 typedef struct s_sprite
 {
 	void	*img;
-	char	*addr;
 	int		width;
 	int		height;
-	int		bpp;
-	int		line_length;
-	int		endian;
 }	t_sprite;
 
 typedef struct s_pos
 {
 	int		x;
 	int		y;
-}				t_pos;
+}	t_pos;
 
 typedef struct s_player
 {
-	void	*img;
-	char	*addr;
+	void	**img;
 	int		width;
 	int		height;
-	int		bpp;
-	int		line_length;
-	int		endian;
+	int		orientation;
 	t_pos	*pos;
 }	t_player;
-
-
-
-
 
 typedef struct s_game
 {
@@ -103,6 +96,5 @@ void	free_map(char **map);
 void	load_game(t_game *game);
 int		key_hooks(int key, t_game *game);
 int		end_game(t_game *game);
-
 
 #endif

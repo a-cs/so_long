@@ -6,7 +6,7 @@
 #    By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/27 22:10:42 by acarneir          #+#    #+#              #
-#    Updated: 2022/02/14 23:20:15 by acarneir         ###   ########.fr        #
+#    Updated: 2022/02/17 00:00:42 by acarneir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,6 @@ SRCS := $(addprefix $(SRC_DIR)/,$(SRCS))
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(MLX) $(OBJS)
-	cp $(LIBFT) $(NAME)
 	$(CC) -lm $(OBJS) $(LIBFT) -L$(MLX_DIR) $(MLX_FLAGS) -o $(NAME)
 
 $(LIBFT):

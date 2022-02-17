@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 22:23:30 by acarneir          #+#    #+#             */
-/*   Updated: 2022/02/15 01:27:39 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/02/16 23:21:38 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static void	is_map_rectangular(t_map *map)
 	len = ft_strlen(map->matrix[row]);
 	while (map->matrix[row])
 	{
-		// printf("row = %d len = %d->%s<-\n", row, (int)ft_strlen(map->matrix[row]),  map->matrix[row]);
 		if (len != (int)ft_strlen(map->matrix[row]))
 		{
 			len = -1;
@@ -36,7 +35,6 @@ static void	is_map_rectangular(t_map *map)
 	}
 	map->max_x = len - 1;
 	map->max_y = row - 1;
-	// printf("x = %d, y = %d\n", map->max_x, map->max_y);
 }
 
 static void	is_map_surrounded(t_map *map)
