@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 23:24:39 by acarneir          #+#    #+#             */
-/*   Updated: 2022/02/16 23:32:27 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/02/17 21:23:52 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	end_game(t_game *game)
 	exit(0);
 }
 
-void	put_image(t_game *game, int x, int y)
+static void	put_image(t_game *game, int x, int y)
 {
 	if (game->map.matrix[y][x] == '0')
 		mlx_put_image_to_window(game->mlx, game->window->win, game->floor.img,
@@ -62,7 +62,7 @@ void	put_image(t_game *game, int x, int y)
 			y * game->player.height);
 }
 
-void	load_sprites(t_game *game)
+static void	load_sprites(t_game *game)
 {
 	game->floor.img = mlx_xpm_file_to_image(game->mlx, "./assets/floor.xpm",
 			&game->floor.width, &game->floor.height);
@@ -83,7 +83,7 @@ void	load_sprites(t_game *game)
 			&game->player.width, &game->player.height);
 }
 
-int	render_game(t_game	*game)
+static int	render_game(t_game	*game)
 {
 	int		x;
 	int		y;

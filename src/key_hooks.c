@@ -6,13 +6,13 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:17:40 by acarneir          #+#    #+#             */
-/*   Updated: 2022/02/16 23:49:25 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/02/17 21:25:25 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void	find_player(t_game *game)
+static void	find_player(t_game *game)
 {
 	int		x;
 	int		y;
@@ -34,7 +34,7 @@ void	find_player(t_game *game)
 	}
 }
 
-void	move(t_game *game, int delta_x, int delta_y)
+static void	move(t_game *game, int delta_x, int delta_y)
 {
 	char	next_char;
 
